@@ -1,0 +1,37 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: container-mgmt-cnv
+  title: container-mgmt-cnv
+  description: A hands-on OpenShift demo showcasing core container management
+    capabilities — deploying third-party and existing applications,
+    secure-by-default policies, day-2 cluster operations, observability, and
+    multi-cluster management with Red Hat Advanced Cluster Management and
+    Advanced Cluster Security
+  annotations:
+    ph.rhdp.io/content-type: demo
+    ph.rhdp.io/deployment-mode: rhdp_published
+    ph.rhdp.io/github-user: juliaaano
+    ph.rhdp.io/owner: jboeselm@redhat.com
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: rhpds/container-mgmt-cnv
+    ph.rhdp.io/created-at: 2026-08-13T13:51:47.814Z
+  tags:
+    - publishing-house
+    - demo
+    - rhdp-published
+  links:
+    - url: https://github.com/rhpds/container-mgmt-cnv
+      title: Repository
+      icon: github
+    - url: https://devspaces.apps.ocpv-infra02.wdc07.infra.demo.redhat.com#https://github.com/rhpds/container-mgmt-cnv
+      title: Open in DevSpaces
+      icon: catalog
+    - url: https://central-api-publishing-house.apps.ocpv-infra02.wdc07.infra.demo.redhat.com
+      title: Central
+      icon: dashboard
+spec:
+  type: content
+  lifecycle: experimental
+  owner: rhdp-team
+  system: publishing-house
