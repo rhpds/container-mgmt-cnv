@@ -34,19 +34,19 @@ spec:
     duration_min: 10
     status: not_started
   - id: module-02
-    title: "Deploying Third-Party & Existing Applications"
+    title: "Deploying COTS and existing applications"
     duration_min: 12
     status: not_started
   - id: module-03
-    title: "Security by Default"
+    title: "Secure by default"
     duration_min: 10
     status: not_started
   - id: module-04
-    title: "Day-2 Cluster Operations"
+    title: "Cluster Operations"
     duration_min: 10
     status: not_started
   - id: module-05
-    title: "Observability"
+    title: "Observability - Logging and Monitoring"
     duration_min: 10
     status: not_started
   - id: module-06
@@ -58,35 +58,39 @@ spec:
     duration_min: 10
     status: not_started
   environment:
-    platform: ""               # ocp | rhel-vms — determines which sizing fields apply
-    topology: ""               # shared-cluster | per-student | cnv-pool
+    platform: "ocp"            # ocp | rhel-vms — determines which sizing fields apply
+    topology: "cnv-pool"       # shared-cluster | per-student | cnv-pool
     cloud_provider: cnv        # cnv | aws | troshka — cnv is default
     max_concurrent_users: null # required if topology = shared-cluster
 
     # --- OCP-specific fields (only when platform = ocp) ---
-    ocp_version: ""                    # e.g. 4.20 — minimum 4.20; leave empty for rhel-vms
-    cluster_type: ""                   # sno | multinode — only for platform = ocp
-    control_plane_instance_count: null # 1 if sno, 3 if multinode
-    control_plane_cpu: null            # 32 if sno, 16 if multinode
-    control_plane_ram_gb: null         # 128 if sno, 64 if multinode
-    worker_count: null                 # number of OCP worker nodes
-    worker_cpu: null                   # vCPU per worker
-    worker_ram_gb: null                # RAM per worker in GB
-    worker_disk_gb: null               # disk per worker in GB
+    ocp_version: "4.22"                 # e.g. 4.20 — minimum 4.20; leave empty for rhel-vms
+    cluster_type: "multinode"          # sno | multinode — only for platform = ocp
+    control_plane_instance_count: 1    # 1 if sno, 3 if multinode — inherited as-is from security-roadshow-cnv (SNO-sized control plane + separate workers)
+    control_plane_cpu: 32              # 32 if sno, 16 if multinode
+    control_plane_ram_gb: 128          # 128 if sno, 64 if multinode
+    worker_count: 3                    # number of OCP worker nodes
+    worker_cpu: 16                     # vCPU per worker
+    worker_ram_gb: 32                  # RAM per worker in GB
+    worker_disk_gb: null               # disk per worker in GB — TBD, not confirmed from base CI research; additional headroom needed for Crunchy Postgres demo (Module 2, >=10-15GiB) and MinIO/LokiStack (Module 5, needs default StorageClass)
 
     # --- VM-specific fields (only when platform = rhel-vms) ---
     # Each entry: {role, count, cpu, ram_gb, disk_gb, os}
     vms_per_student: []
 
     # --- Common fields (both platforms) ---
-    aap_version: ""                    # required if AAP in products
-    ai_requirement: ""                 # maas | gpu | none
-    ai_model_tier: ""                  # open-source | frontier (if ai_requirement = maas or gpu)
-    ai_model_name: ""                  # specific model e.g. granite-3.1-8b
-    ai_justification: ""               # required if ai_model_tier = frontier or ai_requirement = gpu
-    non_ga_products: []                # list of non-GA products/versions
-    non_ga_access_plan: ""             # how access is provided for non-GA products
-    external_services: []              # named external service dependencies e.g. [github.com]
+    aap_version: ""                    # required if AAP in products — N/A, AAP not in products
+    ai_requirement: "maas"              # maas | gpu | none
+    ai_model_tier: "frontier"           # open-source | frontier (if ai_requirement = maas or gpu)
+    ai_model_name: "Azure AI (OpenShift Lightspeed backend)" # specific model e.g. granite-3.1-8b
+    ai_justification: "OpenShift Lightspeed only supports a small set of proprietary LLM providers (OpenAI, Azure OpenAI, IBM watsonx) — no open-source option available. Reuses the security-roadshow-cnv base CI's proven Azure AI-backed pattern with automatic token provisioning/rotation." # required if ai_model_tier = frontier or ai_requirement = gpu
+    non_ga_products:
+    - "Cluster Observability Operator — Troubleshooting Panel UI plugins (some capabilities are Technology Preview)"
+    non_ga_access_plan: "None required — enabled via standard OperatorHub install on OCP 4.22, same as any other operator"
+    external_services:
+    - "github.com"          # Showroom content repo, RHACS demo VM init script (rhpds/rhacs-demo), ralvares/openshift-security-framework attribution
+    - "mpbravo.github.io"   # SQL Server + Online Boutique Helm chart repos — interim, pending dedicated automation repo
+    - "Azure AI endpoint"   # OpenShift Lightspeed backend
     gpu_nodes: 0                       # number of GPU nodes (0 = none)
     gpu_type: ""                       # e.g. NVIDIA A100 40GB (required if gpu_nodes > 0)
   duration_hours: 1.4
@@ -119,13 +123,13 @@ approval_checklist:
     module_summaries:
     - title: "Console Overview"
       overview: "Orients the audience to the OpenShift web console as a shared baseline before the container-management-specific modules that follow."
-    - title: "Deploying Third-Party & Existing Applications"
-      overview: "Presenter deploys Microsoft SQL Server via Helm and the existing Online Boutique application on OpenShift, showing both run without application-platform-specific features."
-    - title: "Security by Default"
+    - title: "Deploying COTS and existing applications"
+      overview: "Presenter deploys Crunchy PostgreSQL via Operator, Microsoft SQL Server via Helm, and the existing Online Boutique application on OpenShift, showing each runs without application-platform-specific features."
+    - title: "Secure by default"
       overview: "Presenter walks through Security Context Constraints, RBAC, and NetworkPolicies to show OpenShift's built-in security posture."
-    - title: "Day-2 Cluster Operations"
-      overview: "Presenter performs a live over-the-air cluster upgrade and demonstrates the cluster's self-healing and reconciliation behavior."
-    - title: "Observability"
+    - title: "Cluster Operations"
+      overview: "Presenter performs a live over-the-air cluster upgrade, demonstrates self-healing/reconciliation, and shows OpenShift Lightspeed troubleshooting scenarios."
+    - title: "Observability - Logging and Monitoring"
       overview: "Presenter reviews built-in metrics, LokiStack logging, and the troubleshooting panel for monitoring cluster and application health."
     - title: "Multi-Cluster Management with ACM"
       overview: "Presenter shows Red Hat Advanced Cluster Management managing both an OpenShift cluster and a non-OpenShift cluster from a single hub."
@@ -153,7 +157,7 @@ approval_checklist:
   infra:
     peak_environments: null
     cost_per_run_est: ""
-    provisioning_time_est: ""
-    agnosticv_base_ci: ""
+    provisioning_time_est: "~20 min (cnv-pool topology)"
+    agnosticv_base_ci: "agd_v2/security-roadshow-cnv"
     approved_by: ""
     rejections: []

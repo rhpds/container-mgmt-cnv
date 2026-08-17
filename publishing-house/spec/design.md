@@ -46,6 +46,8 @@ Demo (presenter-led)
 - Red Hat OpenShift Pipelines
 - Red Hat Quay
 - Red Hat build of Keycloak
+- OpenShift Lightspeed (requires an external LLM provider — OpenAI, Azure OpenAI, or IBM watsonx)
+- Cluster Observability Operator (Troubleshooting Panel — some capabilities are Technology Preview)
 - Microsoft SQL Server (third-party software, deployed via Helm — used as the "deploy third-party software" example, not a Red Hat product)
 
 ## Module Map
@@ -53,10 +55,10 @@ Demo (presenter-led)
 | Module | Title | Duration |
 |--------|-------|----------|
 | 1 | Console Overview | 10 min |
-| 2 | Deploying Third-Party & Existing Applications | 12 min |
-| 3 | Security by Default | 10 min |
-| 4 | Day-2 Cluster Operations | 10 min |
-| 5 | Observability | 10 min |
+| 2 | Deploying COTS and existing applications | 12 min |
+| 3 | Secure by default | 10 min |
+| 4 | Cluster Operations | 10 min |
+| 5 | Observability - Logging and Monitoring | 10 min |
 | 6 | Multi-Cluster Management with ACM | 12 min |
 | 7 | Securing the Cluster with ACS | 10 min |
 | — | **Total hands-on/demo** | **74 min** |
@@ -76,22 +78,21 @@ Intermediate
 **Automation needed:** Yes
 
 - Provision the OpenShift hub cluster with ACM, ACS, GitOps, Pipelines, and Quay pre-installed (based on the `agd_v2/security-roadshow-cnv` catalog item)
-- Stage the SQL Server Helm repository access and demo data
-- Deploy the ACS demo target VM (vulnerability-scan scenario)
-- Provision a non-OpenShift spoke cluster and wire it into ACM via auto-import (net-new automation — not yet built; see Infrastructure Requirements)
+- Deploy SQL Server, demo VMs, and any other extra in-cluster workloads via GitOps (Helm + ArgoCD) from a dedicated automation repo — to be created and built separately from this catalog item
+- Provision a non-OpenShift spoke cluster and wire it into ACM via auto-import (net-new automation — not yet built; likely GitOps-managed once the automation repo exists — see Infrastructure Requirements)
 
 ## Infrastructure Requirements
 
-- **Cloud provider:** TBD — confirmed in infrastructure phase
-- **Cluster type:** TBD — confirmed in infrastructure phase
-- **OCP version:** TBD — confirmed in infrastructure phase
-- **Topology:** TBD — confirmed in infrastructure phase
-- **Sizing:** TBD — confirmed in infrastructure phase
-- **Automation approach:** TBD — confirmed in infrastructure phase
-- **AI/MaaS:** TBD — confirmed in infrastructure phase
-- **External services:** TBD — confirmed in infrastructure phase
-- **AAP version:** TBD — confirmed in infrastructure phase
-- **Non-GA products:** TBD — confirmed in infrastructure phase
+- **Cloud provider:** CNV
+- **Cluster type:** Multinode (1 control plane sized as SNO — 32 vCPU/128GB — plus 3 autoscaled CNV workers at 16 vCPU/32GB each; inherited as-is from the `agd_v2/security-roadshow-cnv` base CI)
+- **OCP version:** 4.22
+- **Topology:** CNV pool
+- **Sizing:** Control plane: 1x (32 vCPU, 128GB RAM). Workers: 3x (16 vCPU, 32GB RAM). Additional headroom needed: ≥10-15 GiB free storage for the Crunchy Postgres demo (Module 2), and a default StorageClass for MinIO-backed LokiStack (Module 5).
+- **Automation approach:** Combo — base cluster and operators (ACM, ACS, GitOps, Pipelines, Quay, Keycloak) provisioned via the `agd_v2/security-roadshow-cnv` AgnosticD/Ansible base CI; SQL Server, demo VMs, and any other extra in-cluster workloads deployed via GitOps (Helm + ArgoCD) from a dedicated automation repo — to be created and built separately. Interim state: the real Showroom content currently points Helm chart installs at Pilar's personal GitHub Pages repos (`mpbravo.github.io/helm-charts`, `mpbravo.github.io/online-boutique-helm`) rather than the future automation repo.
+- **AI/MaaS:** MaaS (frontier model) — OpenShift Lightspeed (Module 4) requires an external LLM provider. Reusing the `security-roadshow-cnv` base CI's proven pattern: Azure AI backend, with automatic token provisioning/rotation. Justification: OpenShift Lightspeed only supports a small set of proprietary LLM providers (OpenAI, Azure OpenAI, IBM watsonx) — no open-source option is available for this feature.
+- **External services:** `github.com` (Showroom content repo, RHACS demo VM init script from `rhpds/rhacs-demo`, and the `ralvares/openshift-security-framework` content Module 3 is adapted from), `mpbravo.github.io` (SQL Server and Online Boutique Helm chart repos — interim, pending the dedicated automation repo), and the Azure AI endpoint for OpenShift Lightspeed
+- **AAP version:** N/A — Ansible Automation Platform is not in the products list (AgnosticD workload roles are provisioning automation, not a demoed product)
+- **Non-GA products:** Cluster Observability Operator's Troubleshooting Panel UI plugins ship some capabilities as Technology Preview (per the real Module 5 content) — access plan: none required, enabled via standard OperatorHub install on OCP 4.22, same as any other operator
 
 ## Assessment Strategy (Optional)
 
