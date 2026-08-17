@@ -1,4 +1,4 @@
-# [Project Title]
+# Container Management Standard Demo
 
 <!-- This file is the design document for your lab or demo. -->
 <!-- Fill in each section below, or run /rhdp-publishing-house to have the intake skill help. -->
@@ -7,83 +7,92 @@
 
 ## Overview
 
-[2-3 sentences on what this lab or demo is and why it exists. Then a direct description of what participants will do — specific enough that someone reading this section immediately understands the content without interpretation. No flowery language. Example: "Participants will deploy a 3-tier application on OpenShift, configure autoscaling, and troubleshoot a simulated pod failure."]
+This demo shows how Red Hat OpenShift handles core container-management responsibilities beyond application-platform features — deploying third-party software, enforcing security by default, running day-2 operations, and managing multiple clusters (including a non-OpenShift cluster) from a single pane of glass. It targets audiences evaluating OpenShift specifically as a container-management platform, not just an application platform. Participants will watch a presenter deploy a third-party application (Microsoft SQL Server via Helm) and an existing application (Online Boutique) on OpenShift, walk through OpenShift's secure-by-default RBAC/SCC/NetworkPolicy posture, perform a live over-the-air cluster upgrade and observe self-healing/reconciliation, review built-in observability (metrics, LokiStack logging, troubleshooting panel), see Red Hat Advanced Cluster Management manage both an OpenShift and a non-OpenShift cluster from a single hub, and see Red Hat Advanced Cluster Security scan and secure the environment.
 
 ## Target Audience
 
-- **Role:** [Data scientists, platform engineers, developers, etc.]
-- **Experience level:** [Beginner, intermediate, or advanced]
-- **What they already know:** [Existing skills and knowledge]
-- **What they don't know:** [Skills this lab teaches]
+- **Role:** Platform engineers, infrastructure architects, and IT decision-makers evaluating OpenShift for container management
+- **Experience level:** Intermediate
+- **What they already know:** General container/Kubernetes fundamentals (pods, deployments, namespaces), basic cluster operations concepts
+- **What they don't know:** OpenShift-specific console workflows, OpenShift's built-in security defaults, and ACM/ACS capabilities for multi-cluster management and security
 
 ## Prerequisites
 
-- [What the learner must know or have completed before starting]
-- [Can the lab validate these automatically? Yes/No — brief explanation]
-
-<!-- If no prerequisites, write "None" -->
+- General familiarity with Kubernetes/container concepts
+- Can the lab validate these automatically? No — this is a presenter-led demo; prerequisites are assumed, not verified
 
 ## Learning Objectives
 
-1. [Action verb] [specific, measurable outcome]
-2. [Action verb] [specific, measurable outcome]
-3. [Action verb] [specific, measurable outcome]
+1. Deploy third-party and existing applications on OpenShift without relying on application-platform-specific features (e.g., SQL Server via Helm, Online Boutique).
+2. Demonstrate OpenShift's secure-by-default posture using Security Context Constraints, RBAC, and NetworkPolicies.
+3. Perform day-2 cluster operations, including an over-the-air upgrade, and observe self-healing/reconciliation behavior.
+4. Monitor cluster health and application performance using built-in observability tooling (metrics, LokiStack logging, troubleshooting panel).
+5. Manage multiple clusters — including a non-OpenShift cluster — from a single hub using Red Hat Advanced Cluster Management.
+6. Secure the cluster and its workloads using Red Hat Advanced Cluster Security (vulnerability scanning, compliance, risk profiling).
 
-<!-- Scale to duration: up to 3 objectives per 45 min of content. Start with action verbs: Configure, Deploy, Create, Implement, Troubleshoot, Monitor, Scale. Each should be testable. NOT: Understand, Learn, Know. -->
+<!-- 6 objectives for ~70-75 min of content across 7 modules — see note on duration under Module Map. -->
 
 ## Content Type
 
-[Lab (hands-on) or Demo (presenter-led)]
+Demo (presenter-led)
 
 ## Products & Technologies
 
-- [Official Red Hat product name with version if relevant]
-- [Additional products/technologies]
-
-<!-- Use official names: "Red Hat OpenShift", not "OpenShift". List upstream projects separately. -->
+- Red Hat OpenShift Container Platform (4.22)
+- Red Hat OpenShift Virtualization (CNV)
+- Red Hat Advanced Cluster Management
+- Red Hat Advanced Cluster Security
+- Red Hat OpenShift GitOps
+- Red Hat OpenShift Pipelines
+- Red Hat Quay
+- Red Hat build of Keycloak
+- Microsoft SQL Server (third-party software, deployed via Helm — used as the "deploy third-party software" example, not a Red Hat product)
 
 ## Module Map
 
 | Module | Title | Duration |
 |--------|-------|----------|
-| 1 | [Module title] | [XX min] |
-| 2 | [Module title] | [XX min] |
-| — | **Total hands-on** | **[X hours]** |
-| — | Intro / presentation | [~XX min] |
-| — | **Total lab** | **[~X hours]** |
+| 1 | Console Overview | 10 min |
+| 2 | Deploying Third-Party & Existing Applications | 12 min |
+| 3 | Security by Default | 10 min |
+| 4 | Day-2 Cluster Operations | 8 min |
+| 5 | Observability | 8 min |
+| 6 | Multi-Cluster Management with ACM | 12 min |
+| 7 | Securing the Cluster with ACS | 10 min |
+| — | **Total hands-on/demo** | **70 min** |
+| — | Intro / presentation | ~10 min |
+| — | **Total demo** | **~80 min** |
 
-<!-- Each module 10-30 min. Total: lab 1-4 hours, demo 15-45 min. Modules should build on each other. -->
+<!-- NOTE: This exceeds the typical 15-45 min "demo" guideline. Modules 1-5 reuse an existing Showroom repo (mpbravo/showroom_container-management-demo) that already has real, developed content at this scope. Modules 6-7 (ACM, ACS) are net-new. Flagging for the author: either accept this as an extended/roadshow-style demo (consistent with its `security-roadshow-cnv` base CI, which runs similarly long), or trim Module 1 (Console Overview) since it's generic OpenShift navigation rather than container-management-specific. -->
 
 ## Difficulty Level
 
-[Beginner, Intermediate, or Advanced]
+Intermediate
 
 ## Environment
 
-**Learner view:** [What exists when the lab starts — pre-deployed resources, what participants see and interact with. Be specific about cluster details.]
+**Learner view:** A live, pre-provisioned OpenShift 4.22 cluster (CNV-based) with Red Hat Advanced Cluster Management, Red Hat Advanced Cluster Security, OpenShift GitOps, OpenShift Pipelines, Quay, and Keycloak already installed. A SQL Server Helm chart repository and a sample vulnerable demo VM are pre-staged for the ACS scanning walkthrough. A second, non-OpenShift cluster is available as an ACM-managed spoke.
 
-**Automation needed:** [Yes/No]
+**Automation needed:** Yes
 
-[If yes, list what automation must provision — operators, per-user resources, sample apps, data sets.]
+- Provision the OpenShift hub cluster with ACM, ACS, GitOps, Pipelines, and Quay pre-installed (based on the `agd_v2/security-roadshow-cnv` catalog item)
+- Stage the SQL Server Helm repository access and demo data
+- Deploy the ACS demo target VM (vulnerability-scan scenario)
+- Provision a non-OpenShift spoke cluster and wire it into ACM via auto-import (net-new automation — not yet built; see Infrastructure Requirements)
 
 ## Infrastructure Requirements
 
-- **Cloud provider:** [CNV (default), AWS, or Troshka (bare-metal/nested virt)]
-- **Cluster type:** [Multinode or SNO (Single Node OpenShift)]
-- **OCP version:** [e.g. 4.20 — minimum 4.20]
-- **Topology:** [Shared cluster, per-student, or CNV pool]
-- **Sizing:** [Node types and counts with resources — e.g., "3 control plane (16 CPU, 64GB RAM), 6 workers (8 CPU, 32GB RAM, 100GB disk)"]
-- **Automation approach:** [Ansible, GitOps (Helm + ArgoCD), or combo]
-- **AI/MaaS:** [None, MaaS (open-source model), MaaS (frontier model), or dedicated GPU — include justification if not "none"]
-- **External services:** [Named services — e.g., github.com, registry.access.redhat.com — or "None"]
-- **AAP version:** [e.g. 2.5 — only if AAP is in products; omit otherwise]
-- **Non-GA products:** [Product name + version, with access plan — or "None (all products are GA)"]
-
-<!-- Not all fields must be known at intake. "TBD, estimating ~X" is fine. -->
+- **Cloud provider:** TBD — confirmed in infrastructure phase
+- **Cluster type:** TBD — confirmed in infrastructure phase
+- **OCP version:** TBD — confirmed in infrastructure phase
+- **Topology:** TBD — confirmed in infrastructure phase
+- **Sizing:** TBD — confirmed in infrastructure phase
+- **Automation approach:** TBD — confirmed in infrastructure phase
+- **AI/MaaS:** TBD — confirmed in infrastructure phase
+- **External services:** TBD — confirmed in infrastructure phase
+- **AAP version:** TBD — confirmed in infrastructure phase
+- **Non-GA products:** TBD — confirmed in infrastructure phase
 
 ## Assessment Strategy (Optional)
 
-<!-- Optional — skip this section for demos or classic labs without verification. -->
-<!-- Relevant for Zero-Touch labs with solve/validate buttons or labs with automated checks. -->
-
-[If applicable: how will we know the learner successfully completed each module? Per module: verification script, solve/validate button, visible result in the UI, or automated check.]
+Trust-based — this is a presenter-led demo with no automated learner validation.

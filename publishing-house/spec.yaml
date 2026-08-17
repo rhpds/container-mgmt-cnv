@@ -21,8 +21,42 @@ project:
 
 spec:
   title: "Container Management Standard Demo"
-  learning_objectives: []
-  modules: []              # [{id, title, duration_min}] — written by intake Phase 4; id is stable (e.g. module-01)
+  learning_objectives:
+  - "Deploy third-party and existing applications on OpenShift without relying on application-platform-specific features"
+  - "Demonstrate OpenShift's secure-by-default posture using Security Context Constraints, RBAC, and NetworkPolicies"
+  - "Perform day-2 cluster operations, including an over-the-air upgrade, and observe self-healing/reconciliation behavior"
+  - "Monitor cluster health and application performance using built-in observability tooling"
+  - "Manage multiple clusters, including a non-OpenShift cluster, from a single hub using Red Hat Advanced Cluster Management"
+  - "Secure the cluster and its workloads using Red Hat Advanced Cluster Security"
+  modules:                 # [{id, title, duration_min}] — written by intake Phase 4; id is stable (e.g. module-01)
+  - id: module-01
+    title: "Console Overview"
+    duration_min: 10
+    status: not_started
+  - id: module-02
+    title: "Deploying Third-Party & Existing Applications"
+    duration_min: 12
+    status: not_started
+  - id: module-03
+    title: "Security by Default"
+    duration_min: 10
+    status: not_started
+  - id: module-04
+    title: "Day-2 Cluster Operations"
+    duration_min: 8
+    status: not_started
+  - id: module-05
+    title: "Observability"
+    duration_min: 8
+    status: not_started
+  - id: module-06
+    title: "Multi-Cluster Management with ACM"
+    duration_min: 12
+    status: not_started
+  - id: module-07
+    title: "Securing the Cluster with ACS"
+    duration_min: 10
+    status: not_started
   environment:
     platform: ""               # ocp | rhel-vms — determines which sizing fields apply
     topology: ""               # shared-cluster | per-student | cnv-pool
@@ -55,7 +89,7 @@ spec:
     external_services: []              # named external service dependencies e.g. [github.com]
     gpu_nodes: 0                       # number of GPU nodes (0 = none)
     gpu_type: ""                       # e.g. NVIDIA A100 40GB (required if gpu_nodes > 0)
-  duration_hours: 1
+  duration_hours: 1.25
   audience: "intermediate"   # beginner | intermediate | advanced
 
 development:
@@ -78,7 +112,7 @@ tracking:
 approval_checklist:
 
   content:
-    prerequisites_verifiable: null
+    prerequisites_verifiable: false
     assessment_strategy: ""
     catalog_gap: ""
     design_overview: ""
