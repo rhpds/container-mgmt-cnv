@@ -25,7 +25,7 @@ This demo shows how Red Hat OpenShift handles core container-management responsi
 
 1. Deploy third-party and existing applications on OpenShift without relying on application-platform-specific features (e.g., SQL Server via Helm, Online Boutique).
 2. Demonstrate OpenShift's secure-by-default posture using Security Context Constraints, RBAC, and NetworkPolicies.
-3. Perform day-2 cluster operations, including an over-the-air upgrade, and observe self-healing/reconciliation behavior.
+3. Implement day-2 cluster operations, including an over-the-air upgrade, and observe self-healing/reconciliation behavior.
 4. Monitor cluster health and application performance using built-in observability tooling (metrics, LokiStack logging, troubleshooting panel).
 5. Manage multiple clusters — including a non-OpenShift cluster — from a single hub using Red Hat Advanced Cluster Management.
 6. Secure the cluster and its workloads using Red Hat Advanced Cluster Security (vulnerability scanning, compliance, risk profiling).
@@ -55,13 +55,13 @@ Demo (presenter-led)
 | 1 | Console Overview | 10 min |
 | 2 | Deploying Third-Party & Existing Applications | 12 min |
 | 3 | Security by Default | 10 min |
-| 4 | Day-2 Cluster Operations | 8 min |
-| 5 | Observability | 8 min |
+| 4 | Day-2 Cluster Operations | 10 min |
+| 5 | Observability | 10 min |
 | 6 | Multi-Cluster Management with ACM | 12 min |
 | 7 | Securing the Cluster with ACS | 10 min |
-| — | **Total hands-on/demo** | **70 min** |
+| — | **Total hands-on/demo** | **74 min** |
 | — | Intro / presentation | ~10 min |
-| — | **Total demo** | **~80 min** |
+| — | **Total demo** | **~84 min** |
 
 <!-- NOTE: This exceeds the typical 15-45 min "demo" guideline. Modules 1-5 reuse an existing Showroom repo (mpbravo/showroom_container-management-demo) that already has real, developed content at this scope. Modules 6-7 (ACM, ACS) are net-new. Flagging for the author: either accept this as an extended/roadshow-style demo (consistent with its `security-roadshow-cnv` base CI, which runs similarly long), or trim Module 1 (Console Overview) since it's generic OpenShift navigation rather than container-management-specific. -->
 
