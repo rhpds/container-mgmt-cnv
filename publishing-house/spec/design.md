@@ -30,7 +30,7 @@ This demo shows how Red Hat OpenShift handles core container-management responsi
 5. Manage multiple clusters — including a non-OpenShift cluster — from a single hub using Red Hat Advanced Cluster Management.
 6. Secure the cluster and its workloads using Red Hat Advanced Cluster Security (vulnerability scanning, compliance, risk profiling).
 
-<!-- 6 objectives for ~70-75 min of content across 7 modules — see note on duration under Module Map. -->
+<!-- 6 objectives for ~70-75 min of content across 7 modules — see the duration note below the module table. -->
 
 ## Content Type
 
