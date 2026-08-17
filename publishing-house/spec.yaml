@@ -72,7 +72,7 @@ spec:
     worker_count: 3                    # number of OCP worker nodes
     worker_cpu: 16                     # vCPU per worker
     worker_ram_gb: 32                  # RAM per worker in GB
-    worker_disk_gb: null               # disk per worker in GB — TBD, not confirmed from base CI research; additional headroom needed for Crunchy Postgres demo (Module 2, >=10-15GiB) and MinIO/LokiStack (Module 5, needs default StorageClass)
+    worker_disk_gb: 100                # disk per worker in GB — ESTIMATE, not confirmed from base CI research; pending confirmation from infra reviewer against actual security-roadshow-cnv values. Additional headroom needed for Crunchy Postgres demo (Module 2, >=10-15GiB) and MinIO/LokiStack (Module 5, needs default StorageClass)
 
     # --- VM-specific fields (only when platform = rhel-vms) ---
     # Each entry: {role, count, cpu, ram_gb, disk_gb, os}

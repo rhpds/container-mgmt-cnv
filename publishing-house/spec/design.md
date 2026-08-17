@@ -61,9 +61,8 @@ Demo (presenter-led)
 | 5 | Observability - Logging and Monitoring | 10 min |
 | 6 | Multi-Cluster Management with ACM | 12 min |
 | 7 | Securing the Cluster with ACS | 10 min |
-| — | **Total hands-on/demo** | **74 min** |
-| — | Intro / presentation | ~10 min |
-| — | **Total demo** | **~84 min** |
+
+**Total hands-on/demo:** 74 min. Plus ~10 min intro/presentation — **total demo ~84 min.**
 
 <!-- NOTE: This exceeds the typical 15-45 min "demo" guideline. Modules 1-5 reuse an existing Showroom repo (mpbravo/showroom_container-management-demo) that already has real, developed content at this scope. Modules 6-7 (ACM, ACS) are net-new. Flagging for the author: either accept this as an extended/roadshow-style demo (consistent with its `security-roadshow-cnv` base CI, which runs similarly long), or trim Module 1 (Console Overview) since it's generic OpenShift navigation rather than container-management-specific. -->
 
