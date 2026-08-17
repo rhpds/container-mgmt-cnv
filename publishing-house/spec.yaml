@@ -115,8 +115,22 @@ approval_checklist:
     prerequisites_verifiable: false
     assessment_strategy: ""
     catalog_gap: "Existing catalog items (OPP Hands-on Lab, ACM Demo, Sovereign Cloud Lab) cover the same ACM/ACS/GitOps/virtualization product set, but only as multi-hour (150-300 min) hands-on labs aimed at deep technical practice. None package this scope as a short, presenter-led demo aimed at customers/prospects evaluating OpenShift specifically for container management, or pair it with deploying third-party/existing software as the opening use case."
-    design_overview: ""
-    module_summaries: []
+    design_overview: "This demo addresses a gap in how OpenShift is positioned to customers and prospects evaluating container-management platforms specifically, not just application platforms. Aimed at platform engineers, infrastructure architects, and IT decision-makers at an intermediate level, it walks through deploying third-party and existing software, OpenShift's secure-by-default posture, day-2 cluster operations, observability, and multi-cluster management with ACM (including a non-OpenShift spoke) and ACS — all in a single ~84-minute presenter-led session."
+    module_summaries:
+    - title: "Console Overview"
+      overview: "Orients the audience to the OpenShift web console as a shared baseline before the container-management-specific modules that follow."
+    - title: "Deploying Third-Party & Existing Applications"
+      overview: "Presenter deploys Microsoft SQL Server via Helm and the existing Online Boutique application on OpenShift, showing both run without application-platform-specific features."
+    - title: "Security by Default"
+      overview: "Presenter walks through Security Context Constraints, RBAC, and NetworkPolicies to show OpenShift's built-in security posture."
+    - title: "Day-2 Cluster Operations"
+      overview: "Presenter performs a live over-the-air cluster upgrade and demonstrates the cluster's self-healing and reconciliation behavior."
+    - title: "Observability"
+      overview: "Presenter reviews built-in metrics, LokiStack logging, and the troubleshooting panel for monitoring cluster and application health."
+    - title: "Multi-Cluster Management with ACM"
+      overview: "Presenter shows Red Hat Advanced Cluster Management managing both an OpenShift cluster and a non-OpenShift cluster from a single hub."
+    - title: "Securing the Cluster with ACS"
+      overview: "Presenter uses a pre-staged vulnerable demo VM to show Red Hat Advanced Cluster Security's vulnerability scanning, compliance, and risk profiling."
     rcars_overlap_pct: 100
     rcars_top_matches:
     - title: "Hands-on lab with Red Hat OpenShift Platform Plus (2025)"
