@@ -16,8 +16,8 @@ project:
   automation_type: "gitops"
   description: "A hands-on OpenShift demo showcasing core container management capabilities — deploying third-party and existing applications, secure-by-default policies, day-2 cluster operations, observability, and multi-cluster management with Red Hat Advanced Cluster Management and Advanced Cluster Security"
   # content_reviewer_email and infra_reviewer_email are assigned by the RHDP team — not set by the author
-  jira_ticket: ""
-  workflow_id: ""
+  jira_ticket: "RHDPCD-973"
+  workflow_id: "19b2a802-833c-4330-ab6c-c0c20bea817b"
 
 spec:
   title: ""
