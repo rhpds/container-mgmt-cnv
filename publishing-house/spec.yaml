@@ -114,11 +114,26 @@ approval_checklist:
   content:
     prerequisites_verifiable: false
     assessment_strategy: ""
-    catalog_gap: ""
+    catalog_gap: "Existing catalog items (OPP Hands-on Lab, ACM Demo, Sovereign Cloud Lab) cover the same ACM/ACS/GitOps/virtualization product set, but only as multi-hour (150-300 min) hands-on labs aimed at deep technical practice. None package this scope as a short, presenter-led demo aimed at customers/prospects evaluating OpenShift specifically for container management, or pair it with deploying third-party/existing software as the opening use case."
     design_overview: ""
     module_summaries: []
-    rcars_overlap_pct: null
-    rcars_top_matches: []
+    rcars_overlap_pct: 100
+    rcars_top_matches:
+    - title: "Hands-on lab with Red Hat OpenShift Platform Plus (2025)"
+      ci_name: "sandboxes-gpte.opp-hol.prod"
+      url: "https://catalog.demo.redhat.com/catalog?item=sandboxes-gpte.opp-hol.prod"
+      relevance_score: 100
+      why_it_fits: "This lab directly covers every major product and topic in the request — OpenShift, OpenShift Virtualization, ACM, ACS, GitOps/ArgoCD, Pipelines-adjacent CI/CD security, and Quay — with hands-on exercises spanning multi-cluster management, secure-by-default policy enforcement, day-2 operations, and observability at an intermediate level."
+    - title: "Advanced Cluster Management for Kubernetes Demo"
+      ci_name: "published.ocp4-acm-demo.prod"
+      url: "https://catalog.demo.redhat.com/catalog?item=published.ocp4-acm-demo.prod"
+      relevance_score: 95
+      why_it_fits: "This lab directly covers ACM multi-cluster management across OpenShift clusters, governance/policy enforcement (secure-by-default), multicluster observability, OpenShift Virtualization fleet management, and GitOps with ArgoCD — all core topics in the request."
+    - title: "Sovereign Cloud Architecture with OpenShift: Multi-Cluster Data Residency and Compliance Management"
+      ci_name: "published.sovereign-cloud-lab.prod"
+      url: "https://catalog.demo.redhat.com/catalog?item=published.sovereign-cloud-lab.prod"
+      relevance_score: 84
+      why_it_fits: "This lab directly covers the majority of requested technologies — OpenShift, OpenShift Virtualization, ACM multi-cluster management, ACS security, GitOps with Argo CD, Quay, and Pipelines — with hands-on exercises in day-2 operations, secure-by-default policy enforcement, observability, and multi-cluster management across diverse cluster types."
     rejections: []
 
   infra:
