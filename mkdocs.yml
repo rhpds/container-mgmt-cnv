@@ -1,0 +1,15 @@
+site_name: Container Management Standard Demo
+docs_dir: publishing-house/spec
+nav:
+- Home: index.md
+- Design Spec: design.md
+- Modules:
+  - Module 1 - Console Overview: modules/module-01-console-overview.md
+  - Module 2 - Deploying Applications: modules/module-02-deploying-applications.md
+  - Module 3 - Security By Default: modules/module-03-security-by-default.md
+  - Module 4 - Day2 Operations: modules/module-04-day2-operations.md
+  - Module 5 - Observability: modules/module-05-observability.md
+  - Module 6 - Multicluster Acm: modules/module-06-multicluster-acm.md
+  - Module 7 - Securing Acs: modules/module-07-securing-acs.md
+plugins:
+- techdocs-core
